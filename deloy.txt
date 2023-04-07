@@ -1,0 +1,3 @@
+https://funix-react-api.firebaseapp.com/
+
+https://funix-react-api.web.app/
