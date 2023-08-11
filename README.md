@@ -51,7 +51,7 @@ Tạo giao diện và xử lý các logic cho một trang Web thương mại đi
 
 - **Đường dẫn:** "/checkout".
 - **Feature:** Form để người dùng nhập thông tin giao hàng cũng như thanh toán, thông tin của đơn hàng: _sản phẩm, số lượng, thành tiền..._
-- **Additional feature:** Gửi mail đến người dùng **(Coming soon...)**
+- **Additional feature:** Gửi thông tin đặt hàng vào email của người dùng **(Coming soon...)**
 - **Thành phần:**
   - Mẫu điền thông tin
   - Thông tin giỏ hàng
