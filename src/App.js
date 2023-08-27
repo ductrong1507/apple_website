@@ -15,7 +15,7 @@ import { useSelector } from "react-redux";
 
 function App() {
   const { isAuth, currentUser } = useSelector((state) => state.AuthReducer);
-
+  // new commit
   return (
     <BrowserRouter>
       <Navbar />
