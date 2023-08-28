@@ -1,9 +1,14 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./CheckOut.module.css";
+import emailjs from "@emailjs/browser";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function CheckOut() {
   const { cartArr } = useSelector((state) => state.CartReducer);
+  const form = useRef();
+  const dispatch = useDispatch();
+  const history = useHistory();
 
   // render danh sách order
   const renderOrderList = () => {
@@ -18,6 +23,46 @@ export default function CheckOut() {
         </div>
       );
     });
+  };
+
+  // Nút đặt hàng, gửi mail
+  const orderButtonHandle = (e) => {
+    e.preventDefault();
+    // console.log(
+    //   "order",
+    //   cartArr
+    //     .map((product) => {
+    //       const totalPrice = parseInt(product.price) * product.quantity;
+    //       return `- Tên sản phẩm: ${product.name}\n  Đơn giá: ${Number(
+    //         product.price
+    //       ).toLocaleString()} VNĐ\n  Số lượng: ${
+    //         product.quantity
+    //       }\n  Tổng tiền: ${totalPrice.toLocaleString()} VNĐ\n`;
+    //     })
+    //     .join("\n")
+    // );
+
+    emailjs
+      .sendForm(
+        "service_kgeu1pr",
+        "template_jaqyh8u",
+        form.current,
+        "XZLr8O7s8587MtaDM"
+      )
+      .then(
+        (result) => {
+          console.log(result);
+          console.log(result.text);
+          alert(`Trạng thái đặt hàng ${result.text}`);
+          dispatch({
+            type: "DELETE_ALL_CART",
+          });
+          history.push("/");
+        },
+        (error) => {
+          console.log(error.text);
+        }
+      );
   };
 
   return (
@@ -35,7 +80,7 @@ export default function CheckOut() {
         <h1>Billing Details</h1>
         <div className={styles.check_out_container}>
           {/* Phần form thông tin */}
-          <form className={styles.check_out_form}>
+          <form ref={form} className={styles.check_out_form}>
             <div className={styles.form_group}>
               <label htmlFor="inputFullName">Full Name</label>
               <input
@@ -79,7 +124,32 @@ export default function CheckOut() {
                 placeholder="Enter Your address here!"
               />
             </div>
-            <button type="submit">Place order</button>
+            <input
+              type="hidden"
+              name="content"
+              value={cartArr
+                .map((product) => {
+                  const totalPrice = parseInt(product.price) * product.quantity;
+                  return `- Tên sản phẩm: ${product.name}\n  Đơn giá: ${Number(
+                    product.price
+                  ).toLocaleString()} VNĐ\n  Số lượng: ${
+                    product.quantity
+                  }\n  Tổng tiền: ${totalPrice.toLocaleString()} VNĐ\n`;
+                })
+                .join("\n")}
+            />
+            <input
+              type="hidden"
+              name="total"
+              value={cartArr
+                .reduce((total, item) => {
+                  return total + Number(item.price) * item.quantity;
+                }, 0)
+                .toLocaleString()}
+            />
+            <button onClick={orderButtonHandle} type="submit">
+              Place order
+            </button>
           </form>
 
           {/* Phần thông tin order */}
@@ -107,3 +177,23 @@ export default function CheckOut() {
     </section>
   );
 }
+
+const testarr = [
+  {
+    id: "62ccd4665eefc71539bb6b4c",
+    name: "Apple iPhone 13 Pro Max - Alpine Green",
+    image:
+      "https://firebasestorage.googleapis.com/v0/b/funix-…=media&token=dc72dde3-cfa4-4710-9493-ac2aa0ecf249",
+    price: "29390000",
+    quantity: 5,
+  },
+
+  {
+    id: "62ccdcc95eefc71539bb6b59",
+    name: "Apple AirPods 3rd gen",
+    image:
+      "https://firebasestorage.googleapis.com/v0/b/funix-…=media&token=33b2ebdd-086c-4b8e-9241-0b566ca66754",
+    price: "4390000",
+    quantity: 1,
+  },
+];

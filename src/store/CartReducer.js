@@ -60,6 +60,12 @@ const CartReducer = (state = initialState, action) => {
       return { ...state };
     }
 
+    case "DELETE_ALL_CART": {
+      localStorage.removeItem("CART_ARR");
+
+      return { ...state, cartArr: [] };
+    }
+
     default:
       return { ...state };
   }
