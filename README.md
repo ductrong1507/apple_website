@@ -4,6 +4,23 @@
 
 **Deloy:** https://funix-react-api.web.app/
 
+## Installation
+
+_How to installing and setting up chat app real time._
+
+1. Clone the repo
+   ```sh
+   git clone https://github.com/ductrong1507/apple_website
+   ```
+2. Install NPM packages
+   ```sh
+   npm install
+   ```
+3. Run project
+   ```sh
+   npm start
+   ```
+
 ## Tổng quan dự án
 
 Tạo giao diện và xử lý các logic cho một trang Web thương mại điện tử. Trang Web sẽ bao gồm các chức năng như sau:
@@ -51,7 +68,7 @@ Tạo giao diện và xử lý các logic cho một trang Web thương mại đi
 
 - **Đường dẫn:** "/checkout".
 - **Feature:** Form để người dùng nhập thông tin giao hàng cũng như thanh toán, thông tin của đơn hàng: _sản phẩm, số lượng, thành tiền..._
-- **Additional feature:** Gửi thông tin đặt hàng vào email của người dùng **(Coming soon...)**
+- **Additional feature:** Gửi thông tin đặt hàng vào email của người dùng: _người dùng có thể nhập vào email và thông tin để nhận dc mail đặt hàng._
 - **Thành phần:**
   - Mẫu điền thông tin
   - Thông tin giỏ hàng

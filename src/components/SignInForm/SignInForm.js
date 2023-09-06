@@ -22,7 +22,7 @@ export default function SignInForm(props) {
 
   useEffect(() => {
     if (isAuth) {
-      alert("Bạn đã login thành công!!!");
+      // alert("Bạn đã login thành công!!!");
       history.push("/");
     } else if (isAuth === false) {
       setInputHandle({

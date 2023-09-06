@@ -17,6 +17,8 @@ const AuthReducer = (state = initialState, action) => {
         return { ...state, isAuth: false };
       } else {
         localStorage.setItem("CURRENT_USER", JSON.stringify(userArr[index]));
+        alert("Bạn đã login thành công!!!");
+
         return {
           ...state,
           isAuth: true,
